@@ -10,6 +10,8 @@ import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 import no.hvl.dat100ptc.oppgave4.GPSComputer;
 
+
+
 public class ShowSpeed extends EasyGraphics {
 			
 	private static final int MARGIN = 50;
@@ -42,16 +44,27 @@ public class ShowSpeed extends EasyGraphics {
 	}
 	
 	public void showSpeedProfile(int ybase, int N) {
+		
 
 		// get segments speeds from the GPS computer object		
 		double[] speeds = gpscomputer.speeds();
+		
 
 		int x = MARGIN,y;
 
-		// TODO - START
+		for (int i = 0; i < speeds.length; i++) {		//for løkke med lengden til []speeds
+			
+			double fart = speeds[i];					//henter fart for punkt i
+			double avg = gpscomputer.averageSpeed();	//henter avarege speed 
+			setColor(0,0,255);
+			
+			if ( fart >= 0) {
+				
+				drawLine(x + i*2, ybase, x+i*2, (int)(ybase - fart));          //tegner graf for fart
+				drawLine(x + i*2, (int)(ybase - avg), N, (int)(ybase - avg) ); //tegner avarage speed
+				
+			} 
+		}
 		
-		throw new UnsupportedOperationException(TODO.method());
-	
-		// TODO - SLUTT
 	}
 }
